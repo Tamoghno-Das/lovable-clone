@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.auth.entity.ProjectMember;
 import com.example.dto.member.InviteMemberRequest;
 import com.example.dto.member.MemberResponse;
+import com.example.dto.member.UpdateMemberRoleRequest;
 import com.example.service.ProjectMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,13 +14,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/projects/{projectId}/members")
+@RequestMapping("/api/projects/members")
 public class ProjectMemberController
 {
     private final ProjectMemberService projectMemberService;
 
     @GetMapping("/{projectId}")
-    public ResponseEntity<List<ProjectMember>> getProjectMembers(@PathVariable Long projectId)
+    public ResponseEntity<List<MemberResponse>> getProjectMembers(@PathVariable Long projectId)
     {
         Long  userId = 1L;
         return ResponseEntity.ok(projectMemberService.getProjectMembers(projectId,userId));
@@ -38,11 +39,11 @@ public class ProjectMemberController
     }
 
     @PatchMapping("/{memberId}")
-    public ResponseEntity<MemberResponse>  updateMemberRole
+    public ResponseEntity<MemberResponse> updateMember
             (
                     @PathVariable Long projectId,
                     @PathVariable Long memberId,
-                    @RequestBody InviteMemberRequest request
+                    @RequestBody UpdateMemberRoleRequest request
             )
     {
         Long  userId = 1L;
