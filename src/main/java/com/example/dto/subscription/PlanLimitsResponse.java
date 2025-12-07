@@ -3,8 +3,8 @@ package com.example.dto.subscription;
 public record PlanLimitsResponse
         (
                 String planName,
-                int maxTokensPerDay,
-                int maxProjects,
+                Integer maxTokensPerDay,
+                Integer maxProjects,
                 Boolean unlimitedAI
 
         ) {

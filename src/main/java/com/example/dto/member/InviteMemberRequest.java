@@ -5,7 +5,7 @@ import com.example.enums.ProjectRole;
 public record InviteMemberRequest
         (
                 String email,
-                ProjectRole role,
+                ProjectRole role
 
         ) {
 }
