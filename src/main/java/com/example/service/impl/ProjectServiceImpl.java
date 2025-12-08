@@ -45,18 +45,23 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectSummaryResponse> getUserProject(Long userId) {
+//
 //        return projectRepository.findAllAccessibleByUser(userId)
 //                .stream()
 //                .map(project -> projectMapper.toProjectSummaryResponse(project))
 //                .toList();
+
+        // Better Version of Conversion...
 
         var projects = projectRepository.findAllAccessibleByUser(userId);
         return projectMapper.toProjectSummaryResponseList(projects);
     }
 
     @Override
-    public ProjectResponse getUserProjectById(Long id, Long userId) {
-        return null;
+    public ProjectResponse getUserProjectById(Long id, Long userId)
+    {
+        Project project = projectRepository.findAllAccessibleProjectById(id,userId).orElseThrow();
+        return projectMapper.toProjectResponse(project);
     }
 
 
