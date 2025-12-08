@@ -1,7 +1,6 @@
 package com.example.entity;
 
 import com.example.enums.MessageRole;
-import com.example.enums.PreviewStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

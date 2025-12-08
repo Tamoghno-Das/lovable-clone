@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.dto.auth.entity.Project;
 import com.example.dto.project.ProjectRequest;
 import com.example.dto.project.ProjectResponse;
 import com.example.dto.project.ProjectSummaryResponse;

@@ -1,10 +1,8 @@
 package com.example.service;
 
-import com.example.dto.auth.entity.ProjectMember;
 import com.example.dto.member.InviteMemberRequest;
 import com.example.dto.member.MemberResponse;
 import com.example.dto.member.UpdateMemberRoleRequest;
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
