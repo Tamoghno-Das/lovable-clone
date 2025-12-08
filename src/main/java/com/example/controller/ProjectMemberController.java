@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.dto.auth.entity.ProjectMember;
 import com.example.dto.member.InviteMemberRequest;
 import com.example.dto.member.MemberResponse;
 import com.example.dto.member.UpdateMemberRoleRequest;

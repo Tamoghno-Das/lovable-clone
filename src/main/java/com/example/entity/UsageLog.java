@@ -1,10 +1,8 @@
 package com.example.entity;
 
-import com.example.enums.MessageRole;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
