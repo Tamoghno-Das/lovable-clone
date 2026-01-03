@@ -6,11 +6,10 @@ import java.time.Instant;
 
 public record MemberResponse
         (
-                Long id,
+                Long userid,
                 String email,
                 String name,
-                String avatarUrl,
-                ProjectRole role,
+                ProjectRole projectRole,
                 Instant invitedAt
 
         ) {
