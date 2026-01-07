@@ -5,6 +5,7 @@ import com.example.entity.User;
 import com.example.dto.project.ProjectRequest;
 import com.example.dto.project.ProjectResponse;
 import com.example.dto.project.ProjectSummaryResponse;
+import com.example.error.ResourceNotFoundException;
 import com.example.mapper.ProjectMapper;
 import com.example.repository.ProjectRepository;
 import com.example.repository.UserRepository;
@@ -61,7 +62,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectResponse getUserProjectById(Long id, Long userId)
     {
-        Project project = projectRepository.findAllAccessibleProjectById(id,userId).orElseThrow();
+        Project project = getAccessibleProjectById(id,userId);
         return projectMapper.toProjectResponse(project);
     }
 
@@ -69,7 +70,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponse updateProject(Long id, ProjectRequest request, Long userId) {
-        Project project = projectRepository.findAllAccessibleProjectById(id,userId).orElseThrow();
+        Project project = getAccessibleProjectById(id,userId);
 
         if(!project.getOwner().getId().equals(userId))
         {
@@ -89,7 +90,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void softdelete(Long id, Long userId) {
-        Project project =  projectRepository.findAllAccessibleProjectById(id,userId).orElseThrow();
+        Project project = getAccessibleProjectById(id,userId);
         if(!project.getOwner().getId().equals(userId))
         {
             throw new RuntimeException("You are not allowed to delete");
@@ -100,5 +101,11 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepository.save(project);
         }
 
+    }
+
+    public Project getAccessibleProjectById(Long projectId, Long userId)
+    {
+        return projectRepository.findAllAccessibleProjectById(projectId,userId)
+                .orElseThrow( () -> new ResourceNotFoundException("Project", projectId.toString()));
     }
 }
