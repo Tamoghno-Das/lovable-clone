@@ -1,5 +1,6 @@
 package com.example.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
@@ -10,7 +11,7 @@ public record ApiError
                 HttpStatus status,
                 String message,
                 Instant timestamp,
-                List<ApiFieldError> errors
+                @JsonInclude(JsonInclude.Include.NON_NULL) List<ApiFieldError> errors
         )
 {
     public ApiError(HttpStatus status, String message)

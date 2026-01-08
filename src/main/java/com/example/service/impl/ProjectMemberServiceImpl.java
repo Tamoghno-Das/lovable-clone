@@ -41,7 +41,7 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
         memberResponseList.add(projectMemberMapper.toProjectResponseFromOwner(project.getOwner()));
 
         memberResponseList.addAll(
-                projectMemberRepository.findByIdProjectId(projectId)
+                projectMemberRepository.findByProjectMemberId_ProjectId(projectId)
                 .stream().map(projectMemberMapper::toProjectResponseFromMember)
                 .toList());
 
