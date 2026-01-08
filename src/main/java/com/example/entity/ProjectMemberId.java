@@ -8,6 +8,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectMemberId {
-    long projectId;
-    long userId;
+    Long projectId;
+    Long userId;
 }

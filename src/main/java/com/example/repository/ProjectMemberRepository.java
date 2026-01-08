@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ProjectMemberRepository extends JpaRepository<ProjectMember, ProjectMemberId>
 {
-    List<ProjectMember> findByIdProjectId(Long projectId);
+    List<ProjectMember> findByProjectMemberId_ProjectId(Long projectId);
 }
