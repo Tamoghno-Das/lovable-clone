@@ -12,11 +12,4 @@ public class LovableCloneApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LovableCloneApplication.class, args);
 	}
-
-	@Bean
-	public AuthenticationManager authenticationManager()
-	{
-		return authenticationManager();
-	}
-
 }

@@ -28,7 +28,7 @@ public class ProjectMember {
     @MapsId("userId")
     User user;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     ProjectRole projectRole;
 

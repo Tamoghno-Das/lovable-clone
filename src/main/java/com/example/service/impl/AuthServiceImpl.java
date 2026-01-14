@@ -12,7 +12,6 @@ import com.example.service.AuthService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,15 +32,15 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponse signup(SignUpRequest signUpRequest) {
 
-        userRepository.findByEmail(signUpRequest.email())
+        userRepository.findByUsername(signUpRequest.username())
                 .ifPresent
                         (user ->
                         {
-                            throw new BadRequestException("User Already Exists with email : "+signUpRequest.email());
+                            throw new BadRequestException("User Already Exists with username : "+signUpRequest.username());
                         });
 
         User user = userMapper.toEntity(signUpRequest);
-        user.setPasswordHash(passwordEncoder.encode(signUpRequest.password()));
+        user.setPassword(passwordEncoder.encode(signUpRequest.password()));
         user = userRepository.save(user);
 
         // ACCESSING THE JWT TOKEN USING AUTHUTIL
@@ -54,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse login(LoginRequest loginRequest)
     {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password())
+                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
         );
 
         User user = (User) authentication.getPrincipal();

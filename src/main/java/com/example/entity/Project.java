@@ -30,10 +30,6 @@ public class Project {
     @Column(nullable = false)
     String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id",nullable = false)
-    User owner;
-
     Boolean isPublic;
 
     @CreationTimestamp

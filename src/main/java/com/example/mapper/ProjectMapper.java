@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface ProjectMapper {
 
-    @Mapping(source = "owner", target = "user")
     ProjectResponse toProjectResponse(Project project);
 
+    @Mapping(target = "projectName", source = "name")
     ProjectSummaryResponse toProjectSummaryResponse(Project project);
 
     List<ProjectSummaryResponse> toProjectSummaryResponseList(List<Project> projects);
