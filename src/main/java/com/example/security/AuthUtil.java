@@ -17,46 +17,53 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @Component
-public class AuthUtil
-{
+public class AuthUtil {
         @Value("${app.security.jwt-secret}")
         private String jwtSecret;
 
-        private SecretKey getSecretKey()
-        {
+        private SecretKey getSecretKey() {
                 return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
 
         }
-        public String generateAccessToken(User user)
-        {
-                return  Jwts.builder()
+
+        public String generateAccessToken(User user) {
+                return Jwts.builder()
                         .subject(user.getUsername())
-                        .claim("userId",user.getId().toString())
+                        .claim("userId", user.getId().toString())
                         .issuedAt(Date.from(Instant.now()))
-                        .expiration(new Date(System.currentTimeMillis() + 1000*60*10))
+                        .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
                         .signWith(getSecretKey())
                         .compact();
 
         }
 
-        public JwtUserPrincipal verifyAccessToken(String token)
-        {
+        public JwtUserPrincipal verifyAccessToken(String token) {
                 Claims claims = Jwts.parser().verifyWith(getSecretKey())
                         .build()
                         .parseSignedClaims(token)
                         .getPayload();
 
-                Long userId = Long.parseLong(claims.get("userId",String.class));
+                Long userId = Long.parseLong(claims.get("userId", String.class));
                 String username = claims.getSubject();
-                return  new JwtUserPrincipal(userId,username,new ArrayList<>());
+                return new JwtUserPrincipal(userId, username, new ArrayList<>());
         }
 
         public Long getCurrentUserId() {
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                if (authentication == null || !(authentication.getPrincipal() instanceof JwtUserPrincipal)) {
-                        throw new AuthenticationCredentialsNotFoundException("No JWT token found");
-                }
-                return (Long) authentication.getPrincipal();
+                Authentication authentication =
+                        SecurityContextHolder.getContext().getAuthentication();
 
+                if (authentication == null || !authentication.isAuthenticated()) {
+                        throw new AuthenticationCredentialsNotFoundException("User not authenticated");
+                }
+
+                Object principal = authentication.getPrincipal();
+
+                if (principal instanceof JwtUserPrincipal jwtUserPrincipal) {
+                        return jwtUserPrincipal.userId();
+                }
+
+                throw new AuthenticationCredentialsNotFoundException("Invalid JWT principal");
         }
 }
+
+
