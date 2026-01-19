@@ -13,4 +13,5 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public SubscriptionResponse getCurrentSubscription(Long userId) {
         return null;
     }
+
 }

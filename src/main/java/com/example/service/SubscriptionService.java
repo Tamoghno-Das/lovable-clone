@@ -11,4 +11,5 @@ import org.springframework.stereotype.Service;
 public interface SubscriptionService {
 
     SubscriptionResponse getCurrentSubscription(Long userId);
+
 }
