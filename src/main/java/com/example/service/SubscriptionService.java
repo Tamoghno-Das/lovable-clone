@@ -11,6 +11,4 @@ import org.springframework.stereotype.Service;
 public interface SubscriptionService {
 
     SubscriptionResponse getCurrentSubscription(Long userId);
-    CheckoutResponse createCheckSessionUrl(CheckoutRequest request, Long userId);
-    PortalResponse openCustomerPortal(Long userId);
 }
