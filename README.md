@@ -14,6 +14,12 @@
 
 <img width="1375" height="792" alt="Screenshot 2026-01-16 213514" src="https://github.com/user-attachments/assets/a5a86697-f277-4cf9-83e7-189ae43f1215" />
 
+<img width="1376" height="905" alt="Screenshot 2026-01-19 033216" src="https://github.com/user-attachments/assets/c615e121-cc3c-45d0-9714-6f3944780812" />
+
+<img width="1383" height="935" alt="Screenshot 2026-01-19 033352" src="https://github.com/user-attachments/assets/99790680-9f0d-4813-99d5-378de450f866" />
+
+
+
 
 
 
